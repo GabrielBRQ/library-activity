@@ -8,8 +8,8 @@
 </head>
 <body>
     <header>ONLINE BOOK SHELF</header>
-    <div class="book-shelf container">
-        <img src="img/book-shelf.png" alt="book-shelf">
+    <div class="book-shelf">
+        
     </div>
     <div class="book-form">
         <div class="title-div">
@@ -19,7 +19,7 @@
         <form action='' method='get' id="create">
             <div class="input">
                 <label for='book-name'>Book name:</label>
-                <input id='book-name' name='book-name' type='text' required/>
+                <input id='book-name' name='book-name' type='text' maxlength="40" required/>
             </div>
             <div class="input">
                 <label for='author'>Author:</label>
@@ -27,7 +27,7 @@
             </div>
             <div class="input myNumberInput">
                 <label for='pages'>Pages:</label>
-                <input id='myNumberInput' name='author' type='number' min='10' required/>
+                <input id='myNumberInput' name='pages' type='number' min='10' required/>
             </div>
             <div class="input">
                 <p>You read the book?</p>
@@ -44,7 +44,7 @@
     <footer class="sticky-footer">
         <div class="book-inventory">
             <p>BOOK INVENTORY</p>
-            <p>0/20</p>
+            <p>0</p>
         </div>
         <button class="addButton">ADD BOOK</button>
         <div class="book-count">

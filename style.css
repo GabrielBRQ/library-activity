@@ -8,15 +8,19 @@
     padding: 0;
 }
 
-.book-shelf img{
-    position: relative;
-    width: 75vw;
+
+.book-shelf{
+    display: grid;
+    width: 100vw;
+    gap: 5vh;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 body{
     background-color: #FFDFF4;
     display: flex;
     flex-direction: column;
+    gap: 5vh;
     align-items: center;
 }
 
@@ -28,8 +32,8 @@ header{
 
 footer{
     display: flex;
-    opacity: 0;
-    position: sticky;
+    opacity: 1;
+    position: absolute;
     bottom: 0;
     font-family: library;
     font-size: 4vh;
@@ -39,7 +43,6 @@ footer{
     align-items: center;
     width: calc(100% - 2vh);
     height: 15vh;
-    transition: opacity 0.5s ease;
 }
 
 footer button{
@@ -157,12 +160,33 @@ label{
 }
 
 .book-card{
-    position: absolute;
-    top: 43vh;
-    width: 12vw;
-    height: 7vh;
+    margin-left: 2vh;
+    width: 20vw;
+    height: 30vh;
     font-size: 3vh;
+    border-radius: 10%;
     display: flex;
+    flex-direction: column;
+    text-align: center;
     align-items: center;
-    transform: rotate(90deg);
+    justify-content: space-around;
+    border: double 1vh black;
+}
+
+.book-card h1 {
+    font-family: library;
+    font-size: 3vh;
+}
+
+.book-card p {
+    font-size: 2.5vh;
+}
+
+.book-card button{
+    font-size: 2vh;
+    font-family: library;
+    background-color: #D05557;
+    border: none;
+    width: 10vw;
+    padding: 1vh 4vh 1vh 4vh;
 }

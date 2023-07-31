@@ -5,36 +5,13 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.report = `${title} by ${author}, ${pages} pages, ${read}.`;
+    this.report = `${title} by ${author}, ${pages} pages.`;
 }
 
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
 }
-
-// Select footer element
-const footer = document.querySelector('.sticky-footer');
-
-// Function to show footer when scrolled
-function showFooterOnScroll() {
-
-  // Verify initial window position
-  const scrolled = window.scrollY;
-
-  if (scrolled > 100) {
-    footer.style.opacity = '1';
-    footer.style.visibility = 'visible';
-  }
-}
-
-// event listener with scroll
-window.addEventListener('scroll', showFooterOnScroll);
-
-const numberInput = document.getElementById("myNumberInput");
-numberInput.addEventListener("wheel", (event) => {
-  event.preventDefault();
-});
 
 const bookForm = document.querySelector(".book-form");
 const addButton = document.querySelector(".addButton");
@@ -77,38 +54,49 @@ function handleFormSubmit(event) {
   closeBookForm();
 }
 
-// Function to generate a random color in hexadecimal format (#RRGGBB)
-function getRandomColor() {
-  const letters = '23456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 14)];
-  }
-  return color;
+//function to update invetory counter
+function updateBookCount() {
+  const bookInventoryElement = document.querySelector(".book-inventory p:last-child");
+  const currentCount = parseInt(bookInventoryElement.textContent);
+  const newCount = currentCount + 1;
+  bookInventoryElement.textContent = newCount;
 }
-let currentLeftPosition = 55;
+
 // Function to create a new div to display book information
 function createBookCard(book) {
   const bookCard = document.createElement('div');
   bookCard.classList.add('book-card');
   
 
-
-  // Generate a random background color for the book card
-  const randomColor = getRandomColor();
-  bookCard.style.backgroundColor = randomColor;
+  const bookTitle = document.createElement('h1');
+  bookTitle.textContent = `${book.title}`;
+  bookCard.appendChild(bookTitle);
 
   const bookInfo = document.createElement('p');
-  bookInfo.textContent = `${book.title}`;
+  bookInfo.textContent = `${book.report}`;
   bookCard.appendChild(bookInfo);
 
-  bookCard.style.left = `${currentLeftPosition}vh`;
+  const bookButton = document.createElement('button');
+  bookButton.textContent = book.read == 'read' ? 'read' : 'not read';
+  bookCard.appendChild(bookButton);
 
-  // Append the new book card to the book shelf (or any other container)
+  bookButton.addEventListener('click', () => {
+    if (book.read === 'read') {
+      book.read = 'not read';
+      bookButton.textContent = 'not read';
+      bookButton.style.backgroundColor = '#D05557';
+    } else {
+      book.read = 'read';
+      bookButton.textContent = 'read';
+      bookButton.style.backgroundColor = '#71aca6';
+    }
+  });
+
+  // Append the new book card to the book shelf
   const bookShelf = document.querySelector('.book-shelf');
   bookShelf.appendChild(bookCard);
 
-  currentLeftPosition += 7;
+  updateBookCount();
 }
 
 
