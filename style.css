@@ -11,9 +11,13 @@
 
 .book-shelf{
     display: grid;
-    width: 100vw;
     gap: 5vh;
-    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    grid-template-columns: repeat(4, 20vw);
+}
+
+.book-shelf div:last-child{
+    margin-bottom: 20vh;
 }
 
 body{
@@ -33,7 +37,7 @@ header{
 footer{
     display: flex;
     opacity: 1;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     font-family: library;
     font-size: 4vh;
@@ -160,7 +164,6 @@ label{
 }
 
 .book-card{
-    margin-left: 2vh;
     width: 20vw;
     height: 30vh;
     font-size: 3vh;
@@ -189,4 +192,73 @@ label{
     border: none;
     width: 10vw;
     padding: 1vh 4vh 1vh 4vh;
+}
+
+@media only screen and (max-width: 768px)  {
+    header{
+        text-align: center;
+        font-size: 7vh;
+    }
+
+    .book-form{
+        width: 80vw;
+        height: 50vh;
+        font-size: 2.5vh;
+    }
+    
+    .title-div{
+        width: calc(100% - 2vh);
+        display: grid;
+        grid-template-columns: calc(100% - 1.5vw) 1.5vw;
+        justify-content: center;
+        padding-top: 1vh;
+    }
+
+    label{
+        width: 30vw;
+    }
+
+    input{
+        width: 35vw;
+    }
+
+    .book-card{
+        width: 45vw;
+        height: 26vh;
+        font-size: 2vh;
+    }
+
+    .book-card button{
+        font-size: 1.7vh;
+        width: 20vw;
+        padding: 1vh 2vh 1vh 2vh;
+    }
+
+    .book-shelf{
+        gap: 3vh;
+        grid-template-columns: repeat(2, 45vw);
+    }
+    
+    .book-shelf div:last-child{
+        margin-bottom: 15vh;
+    }
+
+    .book-inventory,
+    .book-count{
+        width: 27vw;
+    }
+
+    footer{
+        height: 10vh;
+        font-size: 2vh;
+    }
+
+    footer p{
+        text-align: center;
+    }
+
+    footer button{
+        padding: 1vh 2vh 1vh 2vh;
+        font-size: 2vh;
+    }
 }
