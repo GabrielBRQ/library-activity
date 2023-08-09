@@ -1,11 +1,12 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+class Book {
+  constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.report = `${title} by ${author}, ${pages} pages.`;
+  }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -105,7 +106,7 @@ function createBookCard(book) {
   bookCard.appendChild(bookTitle);
 
   const bookInfo = document.createElement('p');
-  bookInfo.textContent = `${book.report}`;
+  bookInfo.textContent = `${book.title} by ${book.author}, ${book.pages} pages.`;
   bookCard.appendChild(bookInfo);
 
   const bookButton = document.createElement('button');
