@@ -17,20 +17,24 @@
             <p class="title">ADD BOOK</p>
             <button class="close-button">X</button>
         </div>
-        <form action='' method='get' id="create">
+        <form action='' method='get' id="create" novalidate>
             <div class="input">
                 <label for='book-name'>Book name:</label>
                 <input id='book-name' name='book-name' maxlength="35" type='text' required/>
+                <span class="error" aria-live="polite"></span>
             </div>
+            
             <div class="input">
                 <label for='author'>Author:</label>
                 <input id='author' name='author' type='text' required/>
+                <span class="error" aria-live="polite"></span>
             </div>
             <div class="input myNumberInput">
                 <label for='pages'>Pages:</label>
                 <input id='myNumberInput' name='pages' type='number' min='10' required/>
+                <span class="error" aria-live="polite"></span>
             </div>
-            <div class="input">
+            <div class="input-radio">
                 <p>You read the book?</p>
                 <input type="radio" id="yes" name="fav_language" value="yes">
                 <label for="yes">Yes</label>

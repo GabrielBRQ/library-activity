@@ -34,6 +34,9 @@ closeButton.addEventListener('click', closeBookForm);
 function handleFormSubmit(event) {
   event.preventDefault();
   
+  let bookValidation = false;
+  bookValidation = verifyForm(bookValidation);
+
   // Get the form input values
   const form = event.target;
   const title = form.elements['book-name'].value;
@@ -41,21 +44,59 @@ function handleFormSubmit(event) {
   const pages = parseInt(form.elements['myNumberInput'].value);
   const read = form.elements['fav_language'].value === 'yes' ? 'read' : 'not read';
 
-  // Call addBookToLibrary function with the form input values
-  addBookToLibrary(title, author, pages, read);
 
-  // Create a new div to display the book information and append it to the page
-  const newBook = myLibrary[myLibrary.length - 1];
-  createBookCard(newBook);
+  if(bookValidation == true){
+    // Call addBookToLibrary function with the form input values
+    addBookToLibrary(title, author, pages, read);
+  
+    //Create a new div to display the book information and append it to the page
+    const newBook = myLibrary[myLibrary.length - 1];
+    createBookCard(newBook);
+  
+    //Reset the form fields
+    form.reset();
+  
+    //Hide the book form after submission
+    closeBookForm();
+  }
 
-  // Reset the form fields
-  form.reset();
-
-  // Hide the book form after submission
-  closeBookForm();
 }
 
-//function to update invetory counter
+//Function to verify input form
+function verifyForm(bookValidation){
+  const bookName = document.getElementById("book-name");
+  const bookNameError = document.querySelector("#book-name + span.error");
+  const author = document.getElementById("author");
+  const authorError = document.querySelector("#author + span.error");
+  const pages = document.getElementById("myNumberInput");
+  const pagesError = document.querySelector("#myNumberInput + span.error");
+
+  if (bookName.validity.valueMissing) {
+    bookNameError.style.display = 'block';
+    bookNameError.textContent = "You need to enter your book name";
+    return bookValidation;
+  }
+  if(author.validity.valueMissing) {
+    authorError.style.display = 'block';
+    authorError.textContent = "You need to enter author name";
+    return bookValidation;
+  }
+  if(pages.validity.valueMissing) {
+    pagesError.style.display = 'block';
+    pagesError.textContent = "You need to put how many pages the book have";
+    return bookValidation;
+  }
+  if(pages.validity.rangeUnderflow) {
+    pagesError.style.display = 'block';
+    pagesError.textContent = "The book have to have more pages";
+    return bookValidation;
+  }
+
+  bookValidation = true;
+  return bookValidation;
+}
+
+//Function to update invetory counter
 function updateBookCount() {
   const bookInventoryElement = document.querySelector(".book-inventory p:last-child");
   const currentInventoryCount = parseInt(bookInventoryElement.textContent);
@@ -63,7 +104,7 @@ function updateBookCount() {
   bookInventoryElement.textContent = newInventoryCount;
 }
 
-//function to update read counter
+//Function to update read counter
 function updateReadCount(read, created) {
   const bookReadElement = document.querySelector(".book-count p:last-child");
   const currentReadCount = parseInt(bookReadElement.textContent);
